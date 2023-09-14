@@ -18,6 +18,9 @@ function formObject(type, defaultResult, userInput, currentResult) {
 
 
 function calculation (type){
+
+
+   if(userInput.value!==""&&!isNaN(userInput.value)){
     if(userInput.value!=0){
         let backup = currentResult
         console.log(currentResult)
@@ -70,6 +73,16 @@ function calculation (type){
             formObject('EXPONENTIAL', backup, userInput.value, currentResult)
         }
     }
+   } else{
+    if(isNaN(userInput.value)){
+        alert(`${userInput.value} is not a number`)
+        userInput.value=""
+    }else{
+        alert("please enter a value")
+    }
+}
+
+   
    
 
 
@@ -207,6 +220,7 @@ function modulus() {
     // console.log(logList, "logList")
     // console.log(detailLogEntries, "detailLogEntries")
 }
+
 function exponentional() {
  
     if(userInput.value!==""&&!isNaN(userInput.value)){
@@ -234,6 +248,7 @@ function exponentional() {
     // console.log(logList, "logList")
     // console.log(detailLogEntries, "detailLogEntries")
 }
+
 function ResetAll() {
     currentResult = 0
     calculationDescription = ""
@@ -244,10 +259,10 @@ function ResetAll() {
 }
 
 
-addBtn.addEventListener('click', add)
-subtractBtn.addEventListener('click', subtract)
-multiplyBtn.addEventListener('click', multiply)
-divideBtn.addEventListener('click', divide)
-modulo.addEventListener('click', modulus)
-expo.addEventListener('click', exponentional)
+addBtn.addEventListener('click',  calculation.bind(this,'ADD'))
+subtractBtn.addEventListener('click', calculation.bind(this,'SUB'))
+multiplyBtn.addEventListener('click', calculation.bind(this,'MULTIPLY'))
+divideBtn.addEventListener('click', calculation.bind(this,'DIVIDE'))
+modulo.addEventListener('click', calculation.bind(this,'MODULUS'))
+expo.addEventListener('click', calculation.bind(this,'EXPONENTIAL'))
 Rest.addEventListener('click', ResetAll)
